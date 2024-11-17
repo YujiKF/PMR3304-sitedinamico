@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post
+from .models import Post, Category
 from .forms import PostForm, CommentForm
 
 # Listar todos os posts
@@ -51,3 +51,20 @@ def add_comment(request, pk):
     else:
         form = CommentForm()
     return render(request, 'post/add_comment.html', {'form': form, 'post': post})
+
+# Listagem de todas as categorias
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'post/category_list.html'
+    context_object_name = 'categories'
+
+# Detalhes de uma categoria com posts
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'post/category_detail.html'
+    context_object_name = 'category'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = self.object.posts.all()  # Recupera todos os posts da categoria
+        return context

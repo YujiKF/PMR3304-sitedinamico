@@ -4,7 +4,9 @@
     <h1>{% block site_title %}Meu Blog{% endblock %}</h1>
     <nav>
         <ul>
-            
+            <li><a href="{% url 'home' %}">Início</a></li>
+            <li><a href="{% url 'post_list' %}">Posts</a></li>
+            <li><a href="{% url 'category_list' %}">Categorias</a></li>
         </ul>
     </nav>
 </header>

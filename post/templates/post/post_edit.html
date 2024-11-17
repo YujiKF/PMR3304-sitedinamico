@@ -6,10 +6,11 @@
   <form method="post">
     {% csrf_token %}
     <label for="title">Título:</label>
-    <input type="text" name="title" id="title" value="{{ post.title }}" required><br>
-    <label for="content">Conteúdo:</label>
+    <input type="text" name="title" id="title" value="{{ post.title }}" required><br><br>
+    <label for="content">Conteúdo:</label><br> 
     <textarea name="content" id="content" required>{{ post.content }}</textarea><br>
     <button type="submit" class="btn">Salvar</button>
+    <a href="{% url 'post_detail' post.pk %}" class="btn">Cancelar</a>
   </form>
-  <a href="{% url 'post_detail' post.pk %}" class="btn">Cancelar</a>
+  
 {% endblock %}
