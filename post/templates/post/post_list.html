@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Listagem de Posts</h1>
+  <br>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{% url 'post_detail' post.pk %}" class="post-title">{{ post.title }}</a> - {{ post.created_at|date:"d/m/Y H:i" }}
+      </li>
+    {% endfor %}
+  </ul>
+  <br>
+  <a href="{% url 'home' %}" class="btn">Página inicial</a>
+  <a href="{% url 'post_create' %}" class="btn">Novo post</a> 
+{% endblock %}
