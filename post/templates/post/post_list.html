@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Listagem de Posts</h1>
+  <h1>Lista de Posts</h1>
   <br>
   <ul>
     {% for post in posts %}
@@ -11,6 +11,6 @@
     {% endfor %}
   </ul>
   <br>
-  <a href="{% url 'home' %}" class="btn">Página inicial</a>
+  <a href="{% url 'home' %}" class="btn">Página inicial</a> |
   <a href="{% url 'post_create' %}" class="btn">Novo post</a> 
 {% endblock %}

@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    {% include 'staticpages/partials/head.html' %}
-</head>
+{% block title %}
+    About
+{% endblock %}
 
-<body>
-    {% include 'staticpages/partials/header.html' %}
-
-    <main class="section">
-        <div class="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-
-        <aside>
-            <h2>Sobre</h2>
-            <p>Este site foi feito para PMR3304.</p>
-        </aside>
-    </main>
-
-    {% include 'staticpages/partials/footer.html' %}
-</body>
-
-</html>
+{% block content %}
+    <h1>Sobre o site</h1>
+    <br>
+    <p>Este blog serve para postar meus projetos e que outras pessoas possam compartilhar os seus.</p>
+    <br>
+    <a href="{% url 'home' %}" class="btn">Voltar ao ínicio</a> |
+    <a href="{% url 'post_list' %}" class="btn">Ver posts</a>
+{% endblock %}
