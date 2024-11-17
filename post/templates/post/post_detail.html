@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>{{ post.title }}</h1>
-  <br>
-  <p>{{ post.content|safe }}</p>
-  <p><strong>Publicado em:</strong> {{ post.created_at|date:"d/m/Y H:i" }}</p>
-  <a href="{% url 'post_edit' post.pk %}" class="btn">Editar</a>
-  <a href="{% url 'post_delete' post.pk %}" class="btn">Excluir</a> |
-  <a href="{% url 'post_list' %}" class="btn">Voltar à lista</a>
+    <h2>{{ post.title }}</h2> <br>
+    <p>{{ post.content|safe }}</p>
+    <p>Publicado em {{ post.created_date|date:"d M Y H:i" }}</p>
+    <br><br>
+    <h3>Comentários</h3>
+    <ul>
+        {% for comment in post.comments.all|dictsortreversed:"created_date" %}
+            <li>
+                <strong>{{ comment.author }}:</strong>
+                {{ comment.content }} <em>{{ comment.created_date|date:"d M Y H:i" }}</em>
+            </li>
+        {% empty %}
+            <br><li>Sem comentários ainda.</li>
+        {% endfor %}
+    </ul>
+    <br>
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'add_comment' post.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <a href="{% url 'post_list' %}" class="btn">Ver posts</a> |
+            <button type="submit" class="btn">Adicionar Comentário</button>
+        </form>
+    {% else %}
+        <p><h3>Faça login para adicionar comentários.</h3></p>
+    {% endif %}
 {% endblock %}
